@@ -53,7 +53,7 @@ class OpenAI(Model):
         top_p: float = 1,
         stop: Union[str, Iterable[str], None] = None,
         presence_penalty: float = 0,
-        frequency_penalty: float = 0,
+        frequency_penalty: float = 2,
     ):
         """
         prompts: The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.
