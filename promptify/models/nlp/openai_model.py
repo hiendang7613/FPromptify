@@ -25,11 +25,27 @@ class OpenAI(Model):
         self._openai = openai
         self._openai.api_key = self._api_key
         self.supported_models = (
-            "gpt-3.5-turbo",
-            "text-davinci-003",
-            "text-curie-001",
-            "text-babbage-001",
-            "text-ada-001",
+                "gpt-4-0314",
+                "gpt-3.5-turbo-16k-0613",
+                "gpt-3.5-turbo-0301",
+                "gpt-3.5-turbo-16k",
+                "gpt-4",
+                "gpt-3.5-turbo",
+                "gpt-3.5-turbo-0613",
+                "gpt-4-0613",
+                "text-davinci-003",
+                "davinci",
+                "text-davinci-001",
+                "ada",
+                "text-curie-001",
+                "text-ada-001",
+                "text-babbage-001",
+                "curie",
+                "text-davinci-002",
+                "gpt-3.5-turbo-instruct",
+                "babbage-002",
+                "davinci-002",
+                "gpt-3.5-turbo-base",
         )
         self.encoder = get_encoder()
         assert self.model in self.list_models(), "model not supported"
