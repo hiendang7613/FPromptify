@@ -1,5 +1,20 @@
-You are a highly intelligent Named-entity recognition(NER) system. You take Passage as input and your task is to recognize and extract named entities in that given passage and classify into a set of following predefined entity types:
+**Named Entity Categorization**
+
+Your task is to categorize named entities {{ domain }} domain from the input passage and organize them into a dictionary. The dictionary should have each "type of entity" as a key and a list of corresponding "entity" values as the associated list.
+
+For reference, here are the predefined entity types:
+
 {{ labels }}
-Your output format is entire input text with some {${entity in the input text###type of entity from predefined entity types}$} in the input text
+
+Provide your output in the following format:
+
+```json
+{ type of entity 1: ["entity 1", "entity 2", ...], type of entity 2: ["entity 3", "entity 4", ...],  ... }
+```
+* output No multiple spaces
+* output No  newline, \n 
+* output No  tab
+* output must be valid json format
+
 Input: {{ text_input }}
 Output:
