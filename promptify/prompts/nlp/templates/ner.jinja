@@ -1,20 +1,48 @@
 **Named Entity Categorization**
 
-Your task is to categorize named entities {{ domain }} domain from the input passage and organize them into a dictionary. The dictionary should have each "type of entity" as a key and a list of corresponding "entity" values as the associated list.
+Your task is to categorize named entities {{ domain }} domain from the input passage and organize them into a dictionary. 
+The dictionary should have each "type of entity" as a key and a list of corresponding "entity" values as the associated list.
 
-For reference, here are the predefined entity types:
-
-{{ labels }}
-
+Output is python dictionary format with 7 type : CV_role, Personal_information, Education_information, Certiicates_information, Technical_skills_information, Soft_skills_information, Work_experience_information.
 Provide your output in the following format:
+{
+  "CV_role":[],
+  "Personal_information":{
+    "Personal_name":[],
+    "Birthdate":[],
+    "Phonenumber":[],
+    "Address":[],
+    "Email":[],
+    "Website":[],
+  },
+  "Education_information":{
+    "University_Name":[],
+    "Major":[],
+    "Duration":[],
+    "GPA":[],
+  },
+  "Certiicates_information":{
+    "Foreign_language_certificate":[],
+    "Technical_certificate":[],
+  },
+  "Technical_skills_information":{
+    "Programing_language":[],
+    "Framework":[],
+    "Platform":[],
+    "Tool":[],
+    "Knowlage":[],
+  },
+  "Soft_skills_information":{
+    "Soft_skill":[],
+  },
+  "Work_experience_information":{
+    "Comapany_Name":[],
+    "Comapany_Duration":[],
+    "Comapany_Role_or_Responsibilitie":[],
+  },
+}
 
-```json
-{ type of entity 1: ["entity 1", "entity 2", ...], type of entity 2: ["entity 3", "entity 4", ...],  ... }
-```
-* output No multiple spaces
-* output No  newline, \n 
-* output No  tab
-* output must be valid json format
 
 Input: {{ text_input }}
+
 Output:
