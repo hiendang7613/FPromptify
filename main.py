@@ -23,7 +23,7 @@ parser.add_argument('--api_key',  default='sk-6JFj075qKHvNbzq4hRFDT3BlbkFJubTvgd
 args = parser.parse_args()
 directory_path = args.directory_path 
 
-mode = 'ner 'if args.mode=='CV' else 'JD'
+mode = args.mode
 # ocr_files = []
 # other_error_files = []
 model_name = args.model_name
@@ -52,7 +52,7 @@ def Labeling(
 def get_new_path(path):
   paths = path.split('/')
   paths[-2] = paths[-2] + '_labeled'
-  if mode=='ner':
+  if mode=='CV':
     paths[-1] = paths[-1].replace('.pdf','.txt')
   return '/'.join(paths)
 
@@ -74,7 +74,7 @@ def process_file(labels, file_path):
     if os.path.exists(output_path):
         return
     try:
-        if mode=='ner':
+        if mode=='CV':
           text = read_pdf(file_path)
         else:
           with open(file_path, 'r') as file:
