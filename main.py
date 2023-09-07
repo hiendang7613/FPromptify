@@ -19,7 +19,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--directory_path', default='/content/CV/English/')
 parser.add_argument('--mode',  default='ner', help='ner or JD') 
 parser.add_argument('--model_name',  default='gpt-3.5-turbo') 
-parser.add_argument('--api_key',  default='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') 
+parser.add_argument('--api_key',  default='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') 
 args = parser.parse_args()
 directory_path = args.directory_path #''
 
