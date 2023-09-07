@@ -107,7 +107,7 @@ def process_file(labels, file_path):
 def process_files_in_directory(directory_path):
     list_pdf_paths = []
     for root, _, files in os.walk(directory_path):
-        if mode=='ner':
+        if mode=='CV':
           list_pdf_paths.extend([os.path.join(root, filename) for filename in files if filename.endswith('.pdf')])
         else:
           list_pdf_paths.extend([os.path.join(root, filename) for filename in files if filename.endswith('.txt')])
