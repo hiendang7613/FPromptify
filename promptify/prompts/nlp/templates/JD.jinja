@@ -1,0 +1,50 @@
+**Named Entity Categorization**
+
+Your task is to categorize named entities {{ domain }} domain from the input passage and organize them into a dictionary. 
+The dictionary should have each "type of entity" as a key and a list of corresponding "entity" values as the associated list.
+For reference, here are the predefined entity types:
+{{ labels }}
+
+
+Company Information:
+  Company Name: [Enter Company Name]
+  Address: [Enter Company Address]
+Role: [Enter the role or position title]
+Responsibilities: [List the main responsibilities and duties of the role]
+Technical Skills:
+  Programming Languages: [List relevant programming languages]
+  Frameworks: [List relevant frameworks]
+  Platforms: [List relevant platforms]
+  Tools: [List relevant tools]
+  Knowledge: [List any specific knowledge or expertise required]
+Soft Skills:[List soft skills and interpersonal qualities desired for the role]
+Benefits:[Highlight any benefits or perks offered to the employee in this role]
+Qualifications:[List the educational and professional qualifications required]
+Experience:[Specify the minimum years of experience expected]
+How to Apply:[Provide instructions for interested candidates on how to apply, including contact information or an application link.]
+
+Output is python dictionary format with 7 type : Comapany_information, Role, Responsibilitie, Technical_skills, Soft_skill, Benefit, Experience, How_to_Apply.
+Provide your output in the following format:
+{
+  "Comapany_information":{
+    "Comapany_Name":[],
+    "Address":[],
+  },
+  "Role":[],
+  "Responsibilitie":[],
+  "Technical_skills":{
+    "Programing_language":[],
+    "Framework":[],
+    "Platform":[],
+    "Tool":[],
+    "Knowlage":[],
+  },
+  "Soft_skill":[],
+  "Benefit":[],
+  "Experience":[], 
+  "How_to_Apply"[],
+}
+
+Input: {{ text_input }}
+
+Output:
