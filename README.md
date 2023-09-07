@@ -15,8 +15,8 @@ pip install -r requirements.txt
 To use FPromptify, run the following command in your terminal:
 
 ```bash
-main.py --directory_path <path_to_dir> --mode <'ner' or 'JD'>
+main.py --directory_path <path_to_dir> --mode <'CV' or 'JD'>
 ```
 
-- `mode`: This parameter allows you to choose between two modes: 'ner' for Named Entity Recognition or 'JD' for Job Description labeling.
+- `mode`: This parameter allows you to choose between two modes: Named Entity Recognition on 'CV' for CV or 'JD' for Job Description labeling.
 - `path_to_dir`: Specify the path to the directory containing your PDF data for NER or text data for JD labeling.
