@@ -27,7 +27,7 @@ mode = args.mode
 # ocr_files = []
 # other_error_files = []
 model_name = args.model_name
-api_key = args.api_key
+api_key = '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' #args.api_key
 labels = ', '.join([])
 
 
