@@ -1,0 +1,36 @@
+Report: Team Leader.
+
+The Fullstack Developer will collaborate closely with the product team on a product-oriented mission to achieve product, business and technology goals.
+
+Your role & responsibilities
+• Full-cycle Web Development: Participate in the entire software development lifecycle, from requirements gathering and design to implementation, testing, deployment, and maintenance.
+• Front-end Development: Utilize your proficiency in Vue.js or React.js to create responsive and intuitive user interfaces. Ensure cross-browser compatibility and optimize applications for optimal performance.
+• Back-end Development: Leverage your expertise in Laravel to design and implement scalable APIs and backend functionalities. Create and manage databases, implement server-side logic, and ensure seamless integration with front-end components.
+• Collaborate with the Team: Work closely with cross-functional teams, including designers, product owners, and other developers, to understand project requirements and contribute innovative ideas.
+• Code Quality and Testing: Write clean, efficient, and well-documented code following best practices. Conduct thorough testing and debugging to ensure the application's stability and reliability.
+• Performance Optimization: Identify bottlenecks and areas of improvement within the application's architecture and performance. Implement optimizations to enhance the overall user experience.
+• Stay Up-to-date: Keep abreast of the latest developments in web technologies, frameworks, and best practices. Continuously improve your skills and knowledge to drive innovation within the team.
+• Troubleshooting and Maintenance: Provide support and maintenance for existing applications, troubleshoot issues, and implement necessary updates.
+
+Your skills & qualifications
+• Minimum of 2 years hands-on experience as a Full-stack Developer, working with Laravel, Vue.js, or React.js to deliver complex web applications. Knowledge of Codeigniter is a plus.
+• Strong skills in Vue.js or React.js for building responsive, user-friendly interfaces. Knowledge of HTML, CSS, and JavaScript is essential.
+• Extensive experience in developing backend applications using Laravel PHP framework. Proficiency in database design and management (MySQL, PostgreSQL, or similar).
+• Solid understanding of the entire web development process, including design, development, testing, and deployment.
+• Ability to analyze complex problems, propose effective solutions, and implement them efficiently.
+• Strong teamwork and communication skills, with the ability to work effectively within a collaborative environment.
+• A passion for learning and staying updated with the latest trends, tools, and technologies in web development.
+• Ability to manage time effectively and handle multiple projects simultaneously.
+
+Benefits for you
+• Competitive salary
+• 13th month salary
+• Performance review twice a year
+• Health insurance & social insurance packages according to Labor law
+• Monthly Birthday, Christmas day, Year-End party, Yearly Company trip
+• 12 annual leaves per year
+• Well-equipped with PC & monitor
+• Welcome kit, brand-new & modern office with good facilities
+• Working time: Mon - Fri | 08:00 - 17:30 (1h30 lunch break)
+• Great network with decision makers from big clients in Vietnam & overseas with prospecting IT hiring market
+• Dedicated milestones & recognition with company growth & success
