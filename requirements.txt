@@ -4,3 +4,5 @@ appdirs==1.4.4
 jinja2==2.11.3
 markupsafe==2.0.1
 huggingface_hub==0.12
+crcmod
+PyPDF2
