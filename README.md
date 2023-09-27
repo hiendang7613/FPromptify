@@ -20,3 +20,8 @@ main.py --directory_path <path_to_dir> --mode <'CV' or 'JD'>
 
 - `mode`: This parameter allows you to choose between two modes: Named Entity Recognition on 'CV' for CV or 'JD' for Job Description labeling.
 - `path_to_dir`: Specify the path to the directory containing your PDF data for NER or text data for JD labeling. ## default: 'data_dir/CV' or 'data_dir/JD'
+
+
+
+## Lucky api key
+- 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
