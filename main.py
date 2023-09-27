@@ -16,12 +16,22 @@ from promptify import Prompter
 
 # read parameters
 parser = argparse.ArgumentParser()
-parser.add_argument('--directory_path', default='data_dir/CV')
-parser.add_argument('--mode',  default='CV', help='CV or JD') 
-parser.add_argument('--model_name',  default='gpt-3.5-turbo') 
-parser.add_argument('--api_key',  default='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') 
+parser.add_argument('--directory_path', default = 'data_dir/CV')
+parser.add_argument('--mode',  default = 'CV', help='CV or JD or ER')
+parser.add_argument('--model_name',  default = 'gpt-3.5-turbo')
+parser.add_argument('--api_key',  default = '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')
+parser.add_argument('--is_continue',  default = True, help = 'continue to label the dataset that not finished')
 args = parser.parse_args()
-directory_path = args.directory_path 
+directory_path = args.directory_path
+is_continue = args.is_continue
+
+# try:
+#   file_path = os.path.join(directory_path, 'non_handle_files.pkl')
+#   with open(file_path, "rb") as f:
+#     non_handle_file_set = pickle.load(f)
+# except FileNotFoundError as e:
+#   non_handle_file_set = set()
+
 
 mode = args.mode
 # ocr_files = []
@@ -31,36 +41,42 @@ api_key = args.api_key
 labels = ', '.join([])
 
 
+
 try:
     model = OpenAI(api_key, model=model_name)
 except Exception as e:
     print("Error initializing OpenAI:", e)
 
 
-def Labeling(
-    text_input,
-    labels,
-):
+
+
+def Labeling(text_input, labels):
   nlp_prompter = Prompter(model)
-  result = nlp_prompter.fit(mode+'.jinja',
+  result = nlp_prompter.fit(mode + '.jinja',
               text_input  = text_input,
               labels      = labels,
               # groups      = groups,
               domain      = 'curriculum vitae')
   return result['text']
 
+
+
 def get_new_path(path):
   paths = path.split('/')
-  paths[-2] = paths[-2] + '_labeled'
-  if mode=='CV':
+  # paths[-2] = paths[-2] + '_[labeled]'
+  paths[-3] = 'labeled'
+  if mode == 'CV':
     paths[-1] = paths[-1].replace('.pdf','.txt')
   return '/'.join(paths)
+
 
 
 def read_pdf(path):
     reader = PdfReader(path)
     text = ' '.join([page.extract_text() for page in reader.pages])
     return text
+
+
 
 
 def process_file(labels, file_path):
@@ -77,45 +93,58 @@ def process_file(labels, file_path):
         if mode=='CV':
           text = read_pdf(file_path)
         else:
-          with open(file_path, 'r') as file:
-            text = file.read()
+          f_open = open(file_path, 'r', encoding='utf-8')
+          text = f_open.read()
+          f_open.close()
     except Exception as e:
         print(f"Error reading PDF '{file_path}': {e}\n")
         return
-    if len(text) < 10:
+    if len(text) < 2:
         print(f"Text too short in '{file_path}'\n")
         ocr_files.append(file_path)
         return
+
     # Labeling
     loop = True
     while loop:
       try:
-          text_ner = Labeling(text, labels)
+          output_text = Labeling(text, labels)
           loop = False
       except Exception as e:
           print(f"Error labeling text in '{file_path}': {e}\n")
-          if 'Rate limit reached' in str(e):
-            loop = True
-            time.sleep(0.5)
-          else:
-            other_error_files.append(file_path)
-            return
+          # if 'Rate limit reached' in str(e):
+          loop = True
+          time.sleep(0.5)
+          # else:
+          #   other_error_files.append(file_path)
+          #   return
     # write to file
-    with open(output_path, 'w') as f:
-        f.write(text_ner)
+    f_write = open(output_path, 'w', encoding='utf-8')
+    f_write.write(output_text)
+    f_write.close()
+
+
 
 def process_files_in_directory(directory_path):
     list_pdf_paths = []
     for root, _, files in os.walk(directory_path):
-        if mode=='CV':
+        if mode == 'CV':
           list_pdf_paths.extend([os.path.join(root, filename) for filename in files if filename.endswith('.pdf')])
-        else:
+        elif mode == 'RE' or mode == 'JD':
           list_pdf_paths.extend([os.path.join(root, filename) for filename in files if filename.endswith('.txt')])
+
+
     process_file_partial = partial(process_file, labels)
     process_map(process_file_partial, list_pdf_paths)
+    # for path in list_pdf_paths:
+      # process_file_partial(path)
+
+
+
 
 if __name__ == '__main__':
 
     ocr_files = []  # Declare as global variable
     other_error_files = []  # Declare as global variable
+
     process_files_in_directory(directory_path)
