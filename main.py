@@ -1,6 +1,9 @@
+%cd /content/FPromptify
+
 import os
 import re
-from PyPDF2 import PdfReader
+import fitz  
+
 from tqdm.contrib.concurrent import process_map
 from functools import partial
 from multiprocessing import cpu_count
@@ -24,13 +27,6 @@ parser.add_argument('--is_continue',  default = True, help = 'continue to label 
 args = parser.parse_args()
 directory_path = args.directory_path
 is_continue = args.is_continue
-
-# try:
-#   file_path = os.path.join(directory_path, 'non_handle_files.pkl')
-#   with open(file_path, "rb") as f:
-#     non_handle_file_set = pickle.load(f)
-# except FileNotFoundError as e:
-#   non_handle_file_set = set()
 
 
 mode = args.mode
@@ -61,7 +57,11 @@ def Labeling(text_input, labels):
 
 
 
-def get_new_path(path):
+def new(path):
+
+  new_path = os.path.join(path, os.path.splitext(file)[0] + ".txt")
+
+
   paths = path.split('/')
   # paths[-2] = paths[-2] + '_[labeled]'
   paths[-3] = 'labeled'
@@ -72,26 +72,31 @@ def get_new_path(path):
 
 
 def read_pdf(path):
-    reader = PdfReader(path)
-    text = ' '.join([page.extract_text() for page in reader.pages])
+    pdf_document = fitz.open(path)
+    text = ' '.join([ ' '.join(page.get_text().splitlines()) for page in pdf_document ])
     return text
 
 
 
 
-def process_file(labels, file_path):
+def process_file(file_name):
     global ocr_files
     global other_error_files
 
-    output_path = get_new_path(file_path)
-    dirname = os.path.dirname(output_path)
-    if not os.path.exists(dirname):
-        os.makedirs(dirname)
-    if os.path.exists(output_path):
-        return
+    new_file_name = os.path.splitext(file_name)[0] + ".txt"
+
+    if process_file.file_type == 'pdf':
+      text = read_pdf(os.path.join(process_file.in_dir, file_name))
+    elif process_file.file_type == 'txt':
+    
+    else:
+      raise 
+    
+
+
+    
     try:
         if mode=='CV':
-          text = read_pdf(file_path)
         else:
           f_open = open(file_path, 'r', encoding='utf-8')
           text = f_open.read()
@@ -125,21 +130,16 @@ def process_file(labels, file_path):
 
 
 
-def process_files_in_directory(directory_path):
-    list_pdf_paths = []
-    for root, _, files in os.walk(directory_path):
-        if mode == 'CV':
-          list_pdf_paths.extend([os.path.join(root, filename) for filename in files if filename.endswith('.pdf')])
-        elif mode == 'RE' or mode == 'JD':
-          list_pdf_paths.extend([os.path.join(root, filename) for filename in files if filename.endswith('.txt')])
-
-
-    process_file_partial = partial(process_file, labels)
-    process_map(process_file_partial, list_pdf_paths)
-    # for path in list_pdf_paths:
-      # process_file_partial(path)
-
-
+def process_files_in_directory(in_dir, out_dir, labels, domain='CV', file_type='pdf' ):
+    files = os.listdir(in_dir)
+    files = [ file for file in files if file.lower().endswith('.'+file_type)]
+    process_file.labels = labels
+    process_file.in_dir = in_dir
+    process_file.out_dir = out_dir
+    process_file.domain = domain
+    process_file.file_type = file_type
+    with ThreadPoolExecutor() as executor:
+        list(tqdm(executor.map(process_file, files), total=len(files)))
 
 
 if __name__ == '__main__':
