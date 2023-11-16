@@ -130,3 +130,8 @@ dmypy.json
 .pyre/
 
 .vscode
+
+# my folders
+CV_txt
+CV_txt_labeled
+CV_txt_labeled.zip
